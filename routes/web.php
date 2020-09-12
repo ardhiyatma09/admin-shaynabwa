@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+    return redirect(route('login'));
+});
+
+Auth::routes(['register' => false]);
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard','DashboardController@index')->name('dashboard');
     Route::resource('products','ProductController');
@@ -20,6 +26,3 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('transaction','TransactionController'); 
     Route::get('transaction/{id}/status','TransactionController@setStatus')->name('transaction.status');   
 });
-
-
-Auth::routes(['register' => false]);
